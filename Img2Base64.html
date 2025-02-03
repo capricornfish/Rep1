@@ -1,9 +1,40 @@
+
+ <!DOCTYPE html>
 <html>
-<script>
-  function convertImageToBase64(imageFile, callback) {
-    const reader = new FileReader();
-    reader.onloadend = () => callback(reader.result);
-    reader.readAsDataURL(imageFile);
-  }
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convert local file to Base64</title>
+    <script 
+    src="https://thunkable.github.io/webviewer-extension/thunkableWebviewerExtension.js"
+    type="text/javascript"></script>
+    <style>
+      .choose::-webkit-file-upload-button {
+        color: white;
+        display: inline-block;
+        background: #1CB6E0;
+        border: none;
+        padding: 7px 15px;
+        font-weight: 700;
+        border-radius: 3px;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 10pt;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="file" accept="image/*" class="choose" onchange="encodeImageFileAsURL(this)" />
+    <script>
+      function encodeImageFileAsURL(element) {
+        let file = element.files[0];
+        let reader = new FileReader();
+        reader.onloadend = function() {
+          ThunkableWebviewerExtension.postMessage(reader.result);
+          document.write('RESULT: ', reader.result);
+        }
+        reader.readAsDataURL(file);
+      }
+    </script>
+  </body>
 </html>
