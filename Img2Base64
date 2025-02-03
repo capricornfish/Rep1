@@ -1,0 +1,9 @@
+<html>
+<script>
+  function convertImageToBase64(imageFile, callback) {
+    const reader = new FileReader();
+    reader.onloadend = () => callback(reader.result);
+    reader.readAsDataURL(imageFile);
+  }
+</script>
+</html>
