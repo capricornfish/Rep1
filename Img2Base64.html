@@ -1,29 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image to Base64 Converter</title>
-  <script>
-    function convertToBase64() {
-      var fileInput = document.getElementById("imageInput");
-      var file = fileInput.files[0];
-      var reader = new FileReader();
-
-      reader.onloadend = function () {
-        // Send Base64 string to Thunkable via WebViewer
-        window.ReactNativeWebView.postMessage(reader.result);
-      };
-
-      if (file) {
-        reader.readAsDataURL(file);  // Convert the image to Base64
-      }
-    }
-  </script>
-</head>
-<body>
-  <h2>Convert Image to Base64</h2>
-  <input type="file" id="imageInput" accept="image/*" onchange="convertToBase64()">
-  <p>Select an image and it will be converted to Base64.</p>
-</body>
+<html>
+<script>
+  function convertImageToBase64(imageFile, callback) {
+    const reader = new FileReader();
+    reader.onloadend = () => callback(reader.result);
+    reader.readAsDataURL(imageFile);
+  }
+</script>
 </html>
